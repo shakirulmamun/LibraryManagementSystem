@@ -1,0 +1,170 @@
+﻿@*@model IEnumerable<LibraryManagementSystem.Models.Book>*@
+@model  PagedList.IPagedList<LibraryManagementSystem.Models.Book>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+    var listTblUserRole = (List<LibraryManagementSystem.Models.TblUserRole>)Session["TblUserRoles"];
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                            <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                        </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="width:1100px">
+                            @*@Start creating your amazing application!@*@
+                            <h2 style="text-align: center; color: chocolate">Books Index Page</h2>
+                            @*@Html.ActionLink("Create New", "Create")*@
+                            <p>
+                                @if (listTblUserRole.Where(o => o.PageName == "Books" && o.IsCreate == true).FirstOrDefault() != null)
+                                {
+                                    <span class="btn btn-info">@Html.ActionLink("Create New", "Create")</span>
+                                }
+                            </p>
+
+                            @*<p class="btn btn-warning" style="margin-left:900px;color:white;">
+                                    @Html.ActionLink("Create New", "Create")
+                                </p>*@
+
+
+                            @using (Html.BeginForm("Index", "Books", FormMethod.Get))
+                            {
+                                <p>
+                                    <span style="color:red;font-size:20px">Find by name:</span> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                                    <input type="submit" value="Search" class="btn btn-primary" />
+                                </p>
+                            }
+
+
+                            <table class="table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Author Name</th>
+                                        <th>Category Name</th>
+                                        <th>Book Name</th>
+                                        <th>Cover Image</th>
+                                        <th>Description</th>
+                                        <th>Quantity </th>
+
+                                    </tr>
+                                </thead>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Author.author_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Category.category_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.book_name)
+                                        </td>
+                                        @*<td>
+                                                @Html.DisplayFor(modelItem => item.cover_image)
+                                            </td>*@
+                                        <td>
+                                            <img src="@Url.Content(item.cover_image)" width="50" height="50" class="img-rounded" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                        <td>
+                                            @if (listTblUserRole.Where(o => o.PageName == "Books" && o.IsUpdate == true).FirstOrDefault() != null)
+                                            {
+                                                <a href="/Books/Edit?id=@item.book_id" class="btn btn-primary">Edit</a>
+                                            }
+                                            |
+                                            @if (listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Details", "Details", new { id = item.book_id }, new { @class = "btn btn-info" })
+                                            }
+                                            |
+                                            @if (listTblUserRole.Where(o => o.PageName == "Books" && o.IsDelete == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.book_id }, new { @class = "btn btn-danger" })
+                                            }
+                                        </td>
+                                        @*<td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.book_id }, new { @class = "btn btn-success" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.book_id }, new { @class = "btn btn-info" })
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.book_id }, new { @class = "btn btn-danger" })
+                                            </td>*@
+                                    </tr>
+                                }
+
+                            </table>
+
+                            <br />
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of
+                            @Model.PageCount
+                            @Html.PagedListPager(Model, page => @Url.Action("Index",
+                             new
+                             {
+                                 page,
+                                 sortOrder = ViewBag.CurrentSort,
+                                 currentFilter =
+                            ViewBag.CurrentFilter
+                             }))
+
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+

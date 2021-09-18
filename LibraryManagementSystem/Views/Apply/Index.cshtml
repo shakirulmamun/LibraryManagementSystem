@@ -1,0 +1,108 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.Applicant>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                            <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                        </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <style type="text/css">
+                                body {
+                                    font-family: Arial;
+                                    font-size: 10pt;
+                                }
+
+                                .table {
+                                    border: 1px solid #ccc;
+                                    border-collapse: collapse;
+                                }
+
+                                    .table th {
+                                        background-color: #F7F7F7;
+                                        color: #333;
+                                        font-weight: bold;
+                                    }
+
+                                    .table th, .table td {
+                                        padding: 5px;
+                                        border: 1px solid #ccc;
+                                    }
+                            </style>
+
+                            <h2 style="text-align:center; color: chocolate">Member Profile</h2>
+
+                            <table class="table" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th style="width:150px">Name</th>
+                                        <th style="width:150px">Email</th>
+                                        <th style="width:150px">Phone</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.ApplicantName</td>
+                                            <td>@item.EmailAddr</td>
+                                            <td>@item.Phone</td>
+                                            <td><a href="/Apply/Edit/@item.ApplicantId">Edit</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+

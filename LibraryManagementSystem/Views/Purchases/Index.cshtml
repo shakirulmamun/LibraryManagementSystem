@@ -1,0 +1,206 @@
+﻿@*@model IEnumerable<LibraryManagementSystem.Models.Purchase>*@
+@model  PagedList.IPagedList<LibraryManagementSystem.Models.Purchase>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+    var listTblUserRole = (List<LibraryManagementSystem.Models.TblUserRole>)Session["TblUserRoles"];
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                            <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                        </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2 style="text-align: center; color: chocolate">New Book Purchase Table</h2>
+
+                            <p class="btn btn-info">
+                                @if (listTblUserRole.Where(o => o.PageName == "Purchases" && o.IsCreate == true).FirstOrDefault() != null)
+                                {
+                                    @Html.ActionLink("Create New", "Create")
+                                }
+                            </p>
+
+
+                            @*<p class="btn btn-success">
+                                    @Html.ActionLink("Create New", "Create")
+                                </p>*@
+
+                            @using (Html.BeginForm("Index", "Purchases", FormMethod.Get))
+                            {
+                                <p>
+                                    <span style="color:red;font-size:20px">Find by name:</span> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                                    <input type="submit" value="Search" class="btn btn-primary" />
+                                </p>
+                            }
+
+
+                            <table class="table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Book ID</th>
+                                        <th>Date</th>
+                                        <th>Quantity</th>
+                                        <th>Description</th>
+                                        <th>Publisher Version</th>
+
+                                    </tr>
+                                </thead>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.book_id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.quantity)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.publisher_version)
+                                        </td>
+                                        <td>
+
+                                            @if (listTblUserRole.Where(o => o.PageName == "Purchases" && o.IsUpdate == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.purchase_id }, new { @class = "btn btn-primary" })
+                                            }
+
+                                            @if (listTblUserRole.Where(o => o.PageName == "Purchases" && o.IsRead == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Details", "Details", new { id = item.purchase_id }, new { @class = "btn btn-info" })
+                                            }
+
+                                            @if (listTblUserRole.Where(o => o.PageName == "Purchases" && o.IsDelete == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.purchase_id }, new { @class = "btn btn-danger" })
+                                            }
+                                        </td>
+
+                                        @*<td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.purchase_id }, new { @class = "btn btn-success" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.purchase_id }, new { @class = "btn btn-info" })
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.purchase_id }, new { @class = "btn btn-danger" })
+                                            </td>*@
+                                    </tr>
+                                }
+
+                            </table>
+
+
+
+                            @*<table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Book.book_name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.date)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.quantity)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.description)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.publisher_version)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Book.book_name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.date)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.quantity)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.publisher_version)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.purchase_id }, new { @class = "btn btn-success" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.purchase_id }, new { @class = "btn btn-info" })
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.purchase_id }, new { @class = "btn btn-danger" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>*@
+                            <br />
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of
+                            @Model.PageCount
+                            @Html.PagedListPager(Model, page => @Url.Action("Index",
+                             new
+                             {
+                                 page,
+                                 sortOrder = ViewBag.CurrentSort,
+                                 currentFilter =
+                            ViewBag.CurrentFilter
+                             }))
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

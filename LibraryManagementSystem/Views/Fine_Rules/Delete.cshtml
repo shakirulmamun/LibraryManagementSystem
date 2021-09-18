@@ -1,0 +1,112 @@
+﻿@model LibraryManagementSystem.Models.Fine_Rules
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                        <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                    </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2>Delete</h2>
+
+                            <h3>Are you sure you want to delete this?</h3>
+                            <div>
+                                <h4>Fine_Rules</h4>
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.default_duration)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.default_duration)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.max_duration)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.max_duration)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.duration_unit)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.duration_unit)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.fine_charge)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.fine_charge)
+                                    </dd>
+
+                                </dl>
+
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="Delete" class="btn btn-danger" /> |
+                                        @Html.ActionLink("Back to List", "Index")
+                                    </div>
+                                }
+                            </div>
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+

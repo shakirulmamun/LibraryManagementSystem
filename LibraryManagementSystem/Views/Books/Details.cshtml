@@ -1,0 +1,175 @@
+﻿@model LibraryManagementSystem.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+    var listTblUserRole = (List<LibraryManagementSystem.Models.TblUserRole>)Session["TblUserRoles"];
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                            <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                        </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2 style="text-align: center; color: chocolate">Book Details</h2>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Author Name</th>
+                                        <th>Category Date</th>
+                                        <th>Book Name</th>
+                                        <th>Cover Image</th>
+                                        <th>Description</th>
+                                        <th>Quantity </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(model => model.Author.author_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.Category.category_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.book_name)
+                                        </td>
+                                        <td>
+                                            <img src="@Url.Content(Model.cover_image)" width="50" height="50" class="img-rounded" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.Quantity)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <!--<div>
+                            <h4>Book</h4>
+                            <hr />
+                            <dl >
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Author.author_name)
+                                    @Html.DisplayNameFor(model => model.Category.category_name)
+                                    @Html.DisplayNameFor(model => model.book_name)
+                                    @Html.DisplayNameFor(model => model.cover_image)
+                                    @Html.DisplayNameFor(model => model.description)
+                                    @Html.DisplayNameFor(model => model.Quantity)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Author.author_name)
+                                    @Html.DisplayFor(model => model.Category.category_name)
+                                    @Html.DisplayFor(model => model.book_name)
+                                    <img src="@Url.Content(Model.cover_image)" width="50" height="50" class="img-rounded" />
+                                    @Html.DisplayFor(model => model.description)
+                                    @Html.DisplayFor(model => model.Quantity)
+
+                                </dd>-->
+                            @*<dt>
+                                    @Html.DisplayNameFor(model => model.Category.category_name)
+                                </dt>*@
+
+                            @*<dd>
+                                    @Html.DisplayFor(model => model.Category.category_name)
+                                </dd>*@
+
+                            @*<dt>
+                                    @Html.DisplayNameFor(model => model.book_name)
+                                </dt>*@
+
+                            @*<dd>
+                                    @Html.DisplayFor(model => model.book_name)
+                                </dd>*@
+
+                            @*<dt>
+                                    @Html.DisplayNameFor(model => model.cover_image)
+                                </dt>*@
+
+                            @*<dd>
+                                    <img src="@Url.Content(Model.cover_image)" width="50" height="50" class="img-rounded" />
+                                </dd>*@
+
+                            @*<dt>
+                                    @Html.DisplayNameFor(model => model.description)
+                                </dt>*@
+
+                            @*<dd>
+                                    @Html.DisplayFor(model => model.description)
+                                </dd>*@
+
+                            @*<dt>
+                                    @Html.DisplayNameFor(model => model.Quantity)
+                                </dt>*@
+
+                            @*<dd>
+                                    @Html.DisplayFor(model => model.Quantity)
+                                </dd>*@
+
+                            <!--</dl>
+                            </div>-->
+                            <p>
+                                @if (listTblUserRole.Where(o => o.PageName == "Books" && o.IsUpdate == true).FirstOrDefault() != null)
+                                {
+                                    <a href="/Products/Edit?id=@Model.book_id">Edit</a>
+                                }
+                                |
+
+                                @*@Html.ActionLink("Edit", "Edit", new { id = Model.book_id }) |*@
+                                @Html.ActionLink("Back to List", "Index")
+                            </p>
+
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

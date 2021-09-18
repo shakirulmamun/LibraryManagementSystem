@@ -1,0 +1,115 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+    var listTblUserRole = (List<LibraryManagementSystem.Models.TblUserRole>)Session["TblUserRoles"];
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                            <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                        </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2 style="text-align:center">Category List</h2>
+
+                            <p class="btn btn-info">
+                                @if (listTblUserRole.Where(o => o.PageName == "Categories" && o.IsCreate == true).FirstOrDefault() != null)
+                                {
+                                    @Html.ActionLink("Create New", "Create")
+                                }
+                            </p>
+
+                            @*<p class="btn btn-success">
+                                    @Html.ActionLink("Create New", "Create")
+                                </p>*@
+                            <table class="table" style="margin:0 auto">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.category_name)
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.category_name)
+                                        </td>
+                                        <td>
+
+                                            @if (listTblUserRole.Where(o => o.PageName == "Categories" && o.IsUpdate == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.category_id }, new { @class = "btn btn-primary" })
+                                            }
+
+                                            @if (listTblUserRole.Where(o => o.PageName == "Categories" && o.IsRead == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Details", "Details", new { id = item.category_id }, new { @class = "btn btn-info" })
+                                            }
+
+                                            @if (listTblUserRole.Where(o => o.PageName == "Categories" && o.IsDelete == true).FirstOrDefault() != null)
+                                            {
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.category_id }, new { @class = "btn btn-danger" })
+                                            }
+                                        </td>
+
+                                        @*<td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.category_id }, new { @class = "btn btn-success" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.category_id }, new { @class = "btn btn-info" })
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.category_id }, new { @class = "btn btn-danger" })
+                                            </td>*@
+                                    </tr>
+                                }
+
+                            </table>
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+

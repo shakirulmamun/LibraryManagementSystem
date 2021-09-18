@@ -1,0 +1,61 @@
+﻿@model LibraryManagementSystem.Models.TblUser
+
+
+@{
+    ViewBag.Title = "Login";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+
+}
+
+
+<div class="card-body">
+    <img src="~/Book Image/l1.jpg" height="600px" width="100%" style="position: relative;" />
+    @*<img src="~/Book Image/l1.jpg" />*@
+    @*@Start creating your amazing application!@*@
+    <h2 style="margin-left: 700px; color: white; position: absolute; top: 140px"><strong>Login</strong></h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="width: 550px; margin-left: 470px; padding-left: 80px; background-color: white; padding-top: 10px; padding-bottom: 15px; position: absolute; top: 200px; box-sizing: border-box; box-shadow: 0 0 30px rgb(41, 33, 33); border-radius: 10px; padding: 40px; ">
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <span style="color:black"> @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span style="color: black"> @Html.LabelFor(model => model.UserPass, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserPass, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserPass, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.UserType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserType, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Login" class="btn btn-success" style="width:100px" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
+

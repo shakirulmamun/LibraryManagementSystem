@@ -1,0 +1,224 @@
+﻿@model LibraryManagementSystem.Models.Applicant
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                        <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                    </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2 style="text-align: center; color: chocolate">Edit</h2>
+                            <style type="text/css">
+                                body {
+                                    font-family: Arial;
+                                    font-size: 10pt;
+                                }
+
+                                .table {
+                                    border: 1px solid #ccc;
+                                    border-collapse: collapse;
+                                }
+
+                                    .table th {
+                                        background-color: #F7F7F7;
+                                        color: #333;
+                                        font-weight: bold;
+                                    }
+
+                                    .table th, .table td {
+                                        padding: 5px;
+                                        border: 1px solid #ccc;
+                                    }
+                            </style>
+
+                            <h3><a href="/Apply/Index">Back</a> </h3>
+
+                            <h3>Applicant</h3>
+                            <input type="hidden" id="ApplicantId" value="@Model.ApplicantId">
+                            <label>Name:</label>
+                            <input type="text" id="ApplicantName" value="@Model.ApplicantName">
+                            <label>Phone:</label>
+                            <input type="text" id="Phone" value="@Model.Phone">
+                            <label>Email:</label>
+                            <input type="text" id="EmailAddr" value="@Model.EmailAddr">
+                            <br />
+                            <br />
+
+                            <h3>Member</h3>
+                            <table id="tblEdu" class="table" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <td style="width:150px">Member Name</td>
+                                        <td style="width:150px">Mobile Number</td>
+                                        @*<td style="width:150px">NID</td>*@
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Members)
+                                    {
+                                        <tr>
+                                            <td>@item.member_name</td>
+                                            <td>@item.mobile</td>
+                                            @*<td>@item.nid</td>*@
+                                            <td><input type="button" value="Remove" onclick="Remove(this)" /></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><input type="text" id="member_name" /></td>
+                                        <td><input type="text" id="mobile" /></td>
+                                        @*<td><input type="text" id="nid" /></td>*@
+
+                                        <td><input type="button" id="btnAdd" value="Add" /></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <input type="button" id="btnSave" value="Save All" />
+                            @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+                            <script type="text/javascript">
+                                // education
+                                $("body").on("click", "#btnAdd", function () {
+                                    //Reference the Name and Country TextBoxes.
+                                    var member_name = $("#member_name");
+                                    var mobile = $("#mobile");
+                                    /*var nid = $("#nid");*/
+
+                                    //Get the reference of the Table's TBODY element.
+                                    var tBody = $("#tblEdu > TBODY")[0];
+
+                                    //Add Row.
+                                    var row = tBody.insertRow(-1);
+
+                                    var cell = $(row.insertCell(-1));
+                                    cell.html(member_name.val());
+
+                                    cell = $(row.insertCell(-1));
+                                    cell.html(mobile.val());
+
+                                    cell = $(row.insertCell(-1));
+                                    /*cell.html(nid.val());*/
+
+
+                                    //Add Button cell.
+                                    cell = $(row.insertCell(-1));
+                                    var btnRemove = $("<input />");
+                                    btnRemove.attr("type", "button");
+                                    btnRemove.attr("onclick", "Remove(this);");
+                                    btnRemove.val("Remove");
+                                    cell.append(btnRemove);
+
+                                    //Clear the TextBoxes.
+                                    member_name.val("");
+                                    mobile.val("");
+                                    /* nid.val("");*/
+
+                                });
+
+                                function Remove(button) {
+                                    //Determine the reference of the Row using the Button.
+                                    var row = $(button).closest("TR");
+                                    var name = $("TD", row).eq(0).html();
+                                    if (confirm("Do you want to delete: " + name)) {
+                                        //Get the reference of the Table.
+                                        var table = $("#tblEdu")[0];
+
+                                        //Delete the Table row using it's Index.
+                                        table.deleteRow(row[0].rowIndex);
+                                    }
+                                };
+                                // end of education
+
+                                $("body").on("click", "#btnSave", function () {
+                                    var oApplicant = {};
+                                    oApplicant.ApplicantId = $("#ApplicantId").val();
+                                    oApplicant.ApplicantName = $("#ApplicantName").val();
+                                    oApplicant.Phone = $("#Phone").val();
+                                    oApplicant.EmailAddr = $("#EmailAddr").val();
+
+                                    //Loop through the Table rows and build a JSON array.
+                                    var listEdu = new Array();
+                                    $("#tblEdu TBODY TR").each(function () {
+                                        var row = $(this);
+                                        var obj = {};
+                                        obj.member_name = row.find("TD").eq(0).html();
+                                        obj.mobile = row.find("TD").eq(1).html();
+                                        /*obj.nid = row.find("TD").eq(2).html();*/
+                                        listEdu.push(obj);
+                                    });
+
+
+                                    //Send the JSON array to Controller using AJAX.
+                                    var appData = { oApplicant, listEdu };
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/Apply/Edit",
+                                        data: JSON.stringify(appData),
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: function (res) {
+                                            if (res.resState) {
+                                                window.location.replace("/Apply/Index");
+                                            }
+                                        }
+                                    });
+                                });
+
+                            </script>
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+

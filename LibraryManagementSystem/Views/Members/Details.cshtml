@@ -1,0 +1,194 @@
+﻿@model LibraryManagementSystem.Models.Member
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                            <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                        </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2 style="text-align: center; color: chocolate">Member Details</h2>
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Member Name</th>
+                                        <th>Register Date</th>
+                                        <th>Employee Y/N</th>
+                                        <th>Mobile</th>
+                                        <th>NID</th>
+                                        <th>Payment Method</th>
+                                        <th>Register Fee</th>
+                                        <th>Expire Date</th>
+                                        <th>Remarks</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(model => model.member_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.register_date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.employee_y_n)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.mobile)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.nid)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.payment_method)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.register_fee)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.register_expire_date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.remarks)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            @*<div>
+                                    <h4>Member</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.member_name)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.member_name)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.register_date)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.register_date)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.employee_y_n)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.employee_y_n)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.mobile)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.mobile)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.nid)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.nid)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.payment_method)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.payment_method)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.register_fee)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.register_fee)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.register_expire_date)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.register_expire_date)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.remarks)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.remarks)
+                                        </dd>
+
+                                    </dl>
+                                </div>*@
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.member_id }, new { @class = "btn btn-primary" }) |
+                                <span class="btn btn-info">@Html.ActionLink("Back to List", "Index")</span>
+                            </p>
+
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

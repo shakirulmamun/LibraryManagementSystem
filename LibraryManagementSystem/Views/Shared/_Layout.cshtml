@@ -1,0 +1,189 @@
+﻿@{
+    var oTblUser = (LibraryManagementSystem.Models.TblUser)Session["TblUsers"];
+    var listTblUserRole = (List<LibraryManagementSystem.Models.TblUserRole>)Session["TblUserRoles"];
+}
+@{
+    var oTblUsers = (LibraryManagementSystem.Models.TblUser)Session["TblUsers"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Library Management System</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+@*navbar-fixed-top*@
+<body>
+    @*<img src="~/R.jpg" / style="opacity:1;background-size:cover;position:fixed">*@
+    <div class="navbar navbar-inverse navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Books", "Index", "Books")</li>
+                    }
+                    @*@if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Categories" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Category", "Index", "Categories")</li>
+                    }*@
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Search", "Search", "Home")</li>
+                    }
+
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Shelf", "Index", "Shelfs")</li>
+                    }
+                    @*@if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("UserType", "Index", "User_Type")</li>
+                    }*@
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Employee", "Index", "Employees")</li>
+                    }
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("BookIssueReturn", "Index", "Book_Issue_Return")</li>
+                    }
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("BookStockDetails", "Index", "Book_Stock_Details")</li>
+                    }
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("BookStockMaster", "Index", "Book_Stock_Master")</li>
+                    }
+
+                    @*@if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Authority", "Index", "Authors")</li>
+                    }*@
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Books" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Members", "Index", "Members")</li>
+                    }
+                    @if (Session["TblUsers"] != null && listTblUserRole.Where(o => o.PageName == "Purchases" && o.IsRead == true).FirstOrDefault() != null)
+                    {
+                        <li>@Html.ActionLink("Purchase", "Index", "Purchases")</li>
+                    }
+
+                    @if (Session["TblUsers"] != null && oTblUser.UserType == LibraryManagementSystem.Libs.Utilities.UserType.SuperAdmin.ToString())
+                    {
+                        <li>@Html.ActionLink("User", "Index", "Users")</li>
+                    }
+                    @if (Session["TblUsers"] != null)
+                    {
+                        <li>@Html.ActionLink("Profile", "Index", "Apply")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Register", "Create", "Apply")</li>
+                    }
+                    <span style="margin-left:800px">
+                        <ul class="nav navbar-nav navbar-right">
+                            @if (Session["TblUsers"] != null)
+                            {
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Wc, @oTblUser.Username</a></li>
+                                <li><a href="/Home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+                            }
+                            else
+                            {
+                                <li><a href="/Home/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            }
+                            @if (Session["TblUsers"] != null)
+                            {
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Wc, @oTblUser.Username</a></li>
+                                <li>@Html.ActionLink("UserLogout", "UserLogout", "Home")</li>
+
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("UserLogin", "UserLogin", "Home")</li>
+                            }
+                        </ul>
+                    </span>
+                </ul>
+
+                @*<ul class="nav navbar-nav navbar-right">
+                        @if (Session["TblUsers"] != null)
+                        {
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Wc, @oTblUser.Username</a></li>
+                            <li><a href="/Home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+                        }
+                        else
+                        {
+                            <li><a href="/Home/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        }
+                        @if (Session["TblUsers"] != null)
+                        {
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Wc, @oTblUser.Username</a></li>
+                            <li>@Html.ActionLink("UserLogout", "UserLogout", "Home")</li>
+
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("UserLogin", "UserLogin", "Home")</li>
+                        }
+                    </ul>*@
+            </div>
+
+            <div class="navbar-collapse collapse">
+
+                @*<ul class="nav navbar-nav navbar-right">
+                        @if (Session["TblUsers"] != null)
+                        {
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome, @oTblUser.Username</a></li>
+                            <li><a href="/Home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/Home/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        }
+                        @if (Session["TblUsers"] != null)
+                        {
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome, @oTblUser.Username</a></li>
+                            <li>@Html.ActionLink("UserLogout", "UserLogout", "Home")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("UserLogin", "UserLogin", "Home")</li>
+                        }
+                    </ul>*@
+
+            </div>
+        </div>
+    </div><br /><br />
+
+    <h1 style="text-align:center;color:#ff6a00"><strong>Library Management System</strong></h1>
+    <img src="~/Imagem-de-Livro-PNG.png" width="250" height="150" style="margin-left:560px" />
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="text-align:right;color:red">&copy; @DateTime.Now.Year - Library Management System &copy; Designed by Md. Shakirul Mammun</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

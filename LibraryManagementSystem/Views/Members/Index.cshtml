@@ -1,0 +1,177 @@
+﻿@*@model IEnumerable<LibraryManagementSystem.Models.Member>*@
+@model  PagedList.IPagedList<LibraryManagementSystem.Models.Member>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                        <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                    </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2 style="text-align: center; color: chocolate">Member List</h2>
+
+                            @*<p class="btn btn-warning" >
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+
+                            <p class="btn btn-warning" style="color:white;">
+                                @Html.ActionLink("Create New", "Create")
+                            </p>
+                            @using (Html.BeginForm("Index", "Members", FormMethod.Get))
+                            {
+                                <p>
+                                    <span style="color:red;font-size:20px">Find by name:</span> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                                    <input type="submit" value="Search" class="btn btn-primary" />
+                                </p>
+                            }
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Member Name</th>
+                                        <th>Register Date</th>
+                                        <th>Employee Y/N</th>
+                                        <th>Mobile</th>
+                                        <th>NID</th>
+                                        <th>Card Number</th>
+                                        <th>Register Fee</th>
+                                        <th>Expire Date</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+
+                                @*<tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.member_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.register_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee_y_n)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.mobile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.payment_method)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.register_fee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.register_expire_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.remarks)
+                </th>
+                <th></th>
+            </tr>*@
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.member_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.register_date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.employee_y_n)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.mobile)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nid)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.payment_method)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.register_fee)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.register_expire_date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.remarks)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.member_id }, new { @class = "btn btn-success" })
+                                            @Html.ActionLink("Details", "Details", new { id = item.member_id }, new { @class = "btn btn-info" })
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.member_id }, new { @class = "btn btn-danger" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                            <br />
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of
+                            @Model.PageCount
+                            @Html.PagedListPager(Model, page => @Url.Action("Index",
+                             new
+                             {
+                                 page,
+                                 sortOrder = ViewBag.CurrentSort,
+                                 currentFilter =
+                            ViewBag.CurrentFilter
+                             }))
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

@@ -1,0 +1,121 @@
+﻿@model List<LibraryManagementSystem.Models.TblUserRole>
+@{
+    ViewBag.Title = "UserRole";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Fixed Footer Layout</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                        <li class="breadcrumb-item active">Fixed Footer Layout</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Create</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @*@Start creating your amazing application!@*@
+                            <h2>If you permission plese set Role <i>@TempData["Username"]</i></h2>
+                            <form method="post" action="/Users/UserRole">
+                                @Html.AntiForgeryToken()
+                                <button type="submit">Submit</button>
+                                <table class="table table-responsive table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Page</th>
+                                            <th>Create</th>
+                                            <th>Read</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (var i = 0; i < Model.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" id="tblUserRoles[@i].UserRoleID" name="tblUserRoles[@i].UserRoleID" value="@Model[i].UserRoleID" />
+                                                    <input type="hidden" id="tblUserRoles[@i].UserID" name="tblUserRoles[@i].UserID" value="@Model[i].UserID" />
+                                                    <input type="hidden" id="tblUserRoles[@i].PageName" name="tblUserRoles[@i].PageName" value="@Model[i].PageName" />
+                                                    @Model[i].PageName
+                                                </td>
+                                                <td>
+                                                    @{var checkCreate = Model[i].IsCreate == true ? "checked" : "";}
+                                                    <input type="checkbox" id="tblUserRoles[@i].IsCreate" name="tblUserRoles[@i].IsCreate" value="true" @checkCreate />
+                                                    <input name="tblUserRoles[@i].IsCreate" type="hidden" value="false" />
+                                                </td>
+                                                <td>
+                                                    @{var checkRead = Model[i].IsRead == true ? "checked" : "";}
+                                                    <input type="checkbox" id="tblUserRoles[@i].IsRead" name="tblUserRoles[@i].IsRead" value="true" @checkRead />
+                                                    <input name="tblUserRoles[@i].IsRead" type="hidden" value="false" />
+                                                </td>
+                                                <td>
+                                                    @{var checkUpdate = Model[i].IsUpdate == true ? "checked" : "";}
+                                                    <input type="checkbox" id="tblUserRoles[@i].IsUpdate" name="tblUserRoles[@i].IsUpdate" value="true" @checkUpdate />
+                                                    <input name="tblUserRoles[@i].IsUpdate" type="hidden" value="false" />
+                                                </td>
+                                                <td>
+                                                    @{var checkDelete = Model[i].IsDelete == true ? "checked" : "";}
+                                                    <input type="checkbox" id="tblUserRoles[@i].IsDelete" name="tblUserRoles[@i].IsDelete" value="true" @checkDelete />
+                                                    <input name="tblUserRoles[@i].IsDelete" type="hidden" value="false" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </form>
+
+                            <div>
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+
+                            @*@Start creating your amazing application!@*@
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            Create Book
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+
+
+
+
